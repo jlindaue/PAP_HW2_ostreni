@@ -1,4 +1,5 @@
 *.ppm
+*.png
 time_*.txt
 */prog
 */depend
@@ -8,3 +9,4 @@ mpi_openmp/mpi_openmp
 programOstreni.cpp
 openmp_bmp.cpp
 .idea/
+test3/
