@@ -5,8 +5,8 @@
 #include <mpi.h>
 
 
-#define INPUT_IMAGE  "../vit_normal.ppm"
-#define OUTPUT_IMAGE "../out_mpi.ppm"
+#define INPUT_IMAGE  "vit_normal.ppm"
+#define OUTPUT_IMAGE "out_mpi_openmp.ppm"
 #define MASTER 0
 
 
@@ -21,7 +21,7 @@ void readPPM(unsigned char* &input, int& width, int& height){
     inputFile >> precision;
     std::getline(inputFile,line);
 
-    std::cout << width << "x" << height << "\n";
+    //std::cout << width << "x" << height << "\n";
 
     int widerWidth = width + 2;
     input = new unsigned char[(width+2)*(height+2)*3];
@@ -186,7 +186,7 @@ int main(int argc, char *argv[]) {
     MPI_Get_processor_name(processor_name, &namelen);
 
     if (rank == MASTER) {
-        std::cout << "Reading input\n";
+        //std::cout << "Reading input\n";
         unsigned char *input;
         unsigned char *output;
         readPPM(input, width, height);
@@ -200,9 +200,9 @@ int main(int argc, char *argv[]) {
         receiveOutput(chunkOut,output,numprocs,width,height);
 
         endwtime = MPI_Wtime();
-        std::cout << "Writing result\n";
+        //std::cout << "Writing result\n";
         writePPM(output, width, height);
-        printf("spent time: %f s\n", endwtime - startwtime); fflush(stdout);
+        printf("%f\n", (endwtime - startwtime)*1000); fflush(stdout);
     }else{
         int chunkHeight = receiveInput(chunkIn, width, height);
         //std::cout << "(SLAVE) SCATTERED " << chunkHeight << ":"<< width << ":"<< height << "\n";

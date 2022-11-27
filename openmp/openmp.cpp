@@ -2,8 +2,8 @@
 #include <iostream>
 #include <fstream>
 
-#define INPUT_IMAGE  "../vit_normal.ppm"
-#define OUTPUT_IMAGE "../out_serial.ppm"
+#define INPUT_IMAGE  "vit_normal.ppm"
+#define OUTPUT_IMAGE "out_openmp.ppm"
 
 
 void readPPM(unsigned char* &input, unsigned char* &output, int& width, int& height){
@@ -17,7 +17,7 @@ void readPPM(unsigned char* &input, unsigned char* &output, int& width, int& hei
     inputFile >> precision;
     std::getline(inputFile,line);
 
-    std::cout << width << "x" << height << "\n";
+    //std::cout << width << "x" << height << "\n";
 
     int widerWidth = width + 2;
     input = new unsigned char[(width+2)*(height+2)*3];
@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
     int width, height;
     unsigned char* input;
     unsigned char* output;
-    std::cout << "Reading input\n";
+    //std::cout << "Reading input\n";
     readPPM(input, output, width, height);
 
     clock_gettime(CLOCK_REALTIME, &start);
@@ -83,6 +83,6 @@ int main(int argc, char *argv[]) {
     writePPM(output, width, height);
     elapsed = ( stop.tv_sec - start.tv_sec )*1000
               + (double)( stop.tv_nsec - start.tv_nsec )/(double)1000000;
-    printf( " Execution time of observed program portion is %lf ms\n", elapsed);
+    printf( "%lf\n", elapsed);
     return 0;
 }

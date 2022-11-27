@@ -1,4 +1,5 @@
 *.ppm
+time_*.txt
 */prog
 */depend
 *.o
