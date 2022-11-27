@@ -1,0 +1,9 @@
+*.ppm
+*/prog
+*/depend
+*.o
+mpi/mpi
+mpi_openmp/mpi_openmp
+programOstreni.cpp
+openmp_bmp.cpp
+.idea/
